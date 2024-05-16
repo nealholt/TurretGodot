@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://kxjrntp872nh"]
+
+[ext_resource type="Script" path="res://scripts/TestCam.gd" id="1_eagfd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_so3uq"]
+
+[node name="Spectator" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76958, 0, -3.15751)
+motion_mode = 1
+script = ExtResource("1_eagfd")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.44237, 3.95186, -9.24349)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_so3uq")

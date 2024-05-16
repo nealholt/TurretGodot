@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://bfqe1fxvcp4ay"]
+
+[ext_resource type="Script" path="res://scripts/TurretTeacher.gd" id="1_2xwcd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sieiy"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_juoko"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aswop"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.321569)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_20ssm"]
+material = SubResource("StandardMaterial3D_aswop")
+size = Vector2(50, 50)
+orientation = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wen8r"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sqay7"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4ypi"]
+albedo_color = Color(0.878431, 0, 0.901961, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3o1a3"]
+material = SubResource("StandardMaterial3D_f4ypi")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5lxm"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.321569)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i5ftu"]
+material = SubResource("StandardMaterial3D_e5lxm")
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilend"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_iq484"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wus8x"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tjodk"]
+
+[node name="Turret" type="Node3D"]
+script = ExtResource("1_2xwcd")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_sieiy")
+
+[node name="Cap" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_juoko")
+
+[node name="Head" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="ElevationPlane" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+mesh = SubResource("PlaneMesh_20ssm")
+skeleton = NodePath("../../..")
+
+[node name="Turret1" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37722e-08, -1, 0, 1, -4.37722e-08, -0.3, 0, 0.6)
+mesh = SubResource("CylinderMesh_wen8r")
+skeleton = NodePath("../../..")
+
+[node name="Turret2" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.3, 0, 0.6)
+mesh = SubResource("CylinderMesh_sqay7")
+skeleton = NodePath("../../..")
+
+[node name="LookIndicator" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 25)
+mesh = SubResource("CylinderMesh_3o1a3")
+
+[node name="RotationPlane" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("PlaneMesh_i5ftu")
+skeleton = NodePath("../..")
+
+[node name="projection_indicator" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="projection_indicator"]
+material_override = SubResource("StandardMaterial3D_ilend")
+mesh = SubResource("SphereMesh_iq484")
+
+[node name="elevation_projection" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="elevation_projection"]
+material_override = SubResource("StandardMaterial3D_wus8x")
+mesh = SubResource("SphereMesh_tjodk")

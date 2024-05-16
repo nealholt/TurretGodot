@@ -1,0 +1,141 @@
+[gd_scene load_steps=17 format=3 uid="uid://bvwybm40dvfrm"]
+
+[ext_resource type="Script" path="res://scripts/Target2.gd" id="1_bo1kj"]
+[ext_resource type="Script" path="res://scripts/Mover.gd" id="3_846xh"]
+[ext_resource type="PackedScene" uid="uid://bfqe1fxvcp4ay" path="res://scenes/TurretTeacher.tscn" id="4_pmras"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
+sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
+sky_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+ground_bottom_color = Color(0, 0.215686, 0.101961, 1)
+ground_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+
+[sub_resource type="Sky" id="Sky_c1gdl"]
+sky_material = SubResource("ProceduralSkyMaterial_gyuqi")
+
+[sub_resource type="Environment" id="Environment_g7lfc"]
+background_mode = 2
+sky = SubResource("Sky_c1gdl")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pu5i4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jlbr"]
+albedo_color = Color(0.301961, 0.117647, 1, 1)
+
+[sub_resource type="Curve" id="Curve_10gs1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4jau"]
+curve = SubResource("Curve_10gs1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qk4ue"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_t4jau")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8qup"]
+albedo_color = Color(0.411765, 0.00392157, 0.835294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2os6s"]
+material = SubResource("StandardMaterial3D_t8qup")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5p7xa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6be3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xkf4"]
+albedo_color = Color(0.65098, 1, 0.498039, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g7lfc")
+
+[node name="Target1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.3603)
+script = ExtResource("1_bo1kj")
+radius = 25.0
+orbit_speed = 0.0
+vertical_speed = 0.4
+height_limit = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target1"]
+mesh = SubResource("BoxMesh_pu5i4")
+surface_material_override/0 = SubResource("StandardMaterial3D_7jlbr")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Target1"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_qk4ue")
+draw_pass_1 = SubResource("BoxMesh_2os6s")
+
+[node name="Target2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.895, 0, 11.2237)
+script = ExtResource("1_bo1kj")
+radius = 25.0
+vertical_speed = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target2"]
+mesh = SubResource("BoxMesh_pu5i4")
+surface_material_override/0 = SubResource("StandardMaterial3D_7jlbr")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Target2"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_qk4ue")
+draw_pass_1 = SubResource("BoxMesh_2os6s")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 0)
+motion_mode = 1
+script = ExtResource("3_846xh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("BoxShape3D_5p7xa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(9.99999, 0, 0, 0, 2, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_e6be3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_1xkf4")
+
+[node name="MarginContainer" type="MarginContainer" parent="CharacterBody3D"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -95.0
+offset_right = 286.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CharacterBody3D/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "Direction to target"
+
+[node name="Turret" parent="CharacterBody3D" node_paths=PackedStringArray("target") instance=ExtResource("4_pmras")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998829, 0)
+elevation_speed_deg = 20.0
+rotation_speed_deg = 20.0
+target = NodePath("../../Target1")
+
+[node name="ElevationPlane" parent="CharacterBody3D/Turret/Body/Head" index="0"]
+visible = false
+
+[node name="LookIndicator" parent="CharacterBody3D/Turret/Body/Head" index="3"]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Turret/Body/Head" index="4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="RotationPlane" parent="CharacterBody3D/Turret/Body" index="2"]
+visible = false
+
+[editable path="CharacterBody3D/Turret"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://baw2ic8hbxi3s"]
+
+[ext_resource type="Script" path="res://scripts/Target2.gd" id="1_uhpw3"]
+[ext_resource type="PackedScene" uid="uid://kxjrntp872nh" path="res://scenes/spectator.tscn" id="2_68pm5"]
+[ext_resource type="PackedScene" uid="uid://bfqe1fxvcp4ay" path="res://scenes/TurretTeacher.tscn" id="3_ruiun"]
+[ext_resource type="Script" path="res://scripts/wobble.gd" id="4_c0y8m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
+sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
+sky_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+ground_bottom_color = Color(0, 0.215686, 0.101961, 1)
+ground_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+
+[sub_resource type="Sky" id="Sky_c1gdl"]
+sky_material = SubResource("ProceduralSkyMaterial_gyuqi")
+
+[sub_resource type="Environment" id="Environment_g7lfc"]
+background_mode = 2
+sky = SubResource("Sky_c1gdl")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pu5i4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jlbr"]
+albedo_color = Color(0.301961, 0.117647, 1, 1)
+
+[sub_resource type="Curve" id="Curve_10gs1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4jau"]
+curve = SubResource("Curve_10gs1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qk4ue"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_t4jau")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8qup"]
+albedo_color = Color(0.411765, 0.00392157, 0.835294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2os6s"]
+material = SubResource("StandardMaterial3D_t8qup")
+
+[sub_resource type="BoxMesh" id="BoxMesh_quk8e"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g7lfc")
+
+[node name="Target2" type="Node3D" parent="."]
+script = ExtResource("1_uhpw3")
+radius = 25.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target2"]
+mesh = SubResource("BoxMesh_pu5i4")
+surface_material_override/0 = SubResource("StandardMaterial3D_7jlbr")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Target2"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_qk4ue")
+draw_pass_1 = SubResource("BoxMesh_2os6s")
+
+[node name="Spectator" parent="." instance=ExtResource("2_68pm5")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+script = ExtResource("4_c0y8m")
+z_move_rate = 1.436
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(10, -2.98955e-07, -6.96058e-16, 1.49477e-06, 2, 4.65661e-09, 0, -9.31323e-10, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_quk8e")
+
+[node name="TimerXRotate" type="Timer" parent="Node3D"]
+wait_time = 3.5
+autostart = true
+
+[node name="TimerZRotate" type="Timer" parent="Node3D"]
+wait_time = 2.2
+autostart = true
+
+[node name="TimerZPosition" type="Timer" parent="Node3D"]
+wait_time = 2.5
+autostart = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Node3D"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Node3D/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+
+[node name="Turret" parent="Node3D" node_paths=PackedStringArray("target") instance=ExtResource("3_ruiun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.01423, 1.33749, 4.01986)
+elevation_speed_deg = 30.0
+rotation_speed_deg = 30.0
+target = NodePath("../../Target2")
+
+[node name="projection_indicator" parent="Node3D/Turret" index="1"]
+visible = true
+
+[node name="elevation_projection" parent="Node3D/Turret" index="2"]
+visible = true
+
+[connection signal="timeout" from="Node3D/TimerXRotate" to="Node3D" method="_on_timer_x_rotate_timeout"]
+[connection signal="timeout" from="Node3D/TimerZRotate" to="Node3D" method="_on_timer_z_rotate_timeout"]
+[connection signal="timeout" from="Node3D/TimerZPosition" to="Node3D" method="_on_timer_z_position_timeout"]
+
+[editable path="Node3D/Turret"]
