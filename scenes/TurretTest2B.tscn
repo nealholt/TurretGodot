@@ -55,7 +55,7 @@ environment = SubResource("Environment_g7lfc")
 script = ExtResource("1_5hxb1")
 radius = 25.0
 orbit_speed = 0.2
-vertical_speed = 0.2
+vertical_speed = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Target2"]
 mesh = SubResource("BoxMesh_pu5i4")
@@ -69,7 +69,15 @@ draw_pass_1 = SubResource("BoxMesh_2os6s")
 [node name="Spectator" parent="." instance=ExtResource("2_d72xu")]
 
 [node name="Turret" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_1spkw")]
+elevation_speed_deg = 50.0
+rotation_speed_deg = 50.0
 target = NodePath("../Target2")
+
+[node name="projection_indicator" parent="Turret" index="1"]
+visible = true
+
+[node name="elevation_projection" parent="Turret" index="2"]
+visible = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 2
@@ -85,3 +93,5 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
+
+[editable path="Turret"]
