@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://da5y8fkeokhyx"]
 
-[ext_resource type="Script" path="res://scripts/Target.gd" id="2_qfu36"]
+[ext_resource type="Script" uid="uid://sof4po5hq4jx" path="res://scripts/Target.gd" id="2_qfu36"]
 [ext_resource type="PackedScene" uid="uid://kxjrntp872nh" path="res://scenes/spectator.tscn" id="3_741l1"]
 [ext_resource type="PackedScene" uid="uid://bev43w2t2n2u4" path="res://scenes/TurretBasic.tscn" id="3_tfa8y"]
 

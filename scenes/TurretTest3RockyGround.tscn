@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://baw2ic8hbxi3s"]
 
-[ext_resource type="Script" path="res://scripts/Target2.gd" id="1_uhpw3"]
+[ext_resource type="Script" uid="uid://csayvpq23d3n7" path="res://scripts/Target2.gd" id="1_uhpw3"]
 [ext_resource type="PackedScene" uid="uid://kxjrntp872nh" path="res://scenes/spectator.tscn" id="2_68pm5"]
 [ext_resource type="PackedScene" uid="uid://bfqe1fxvcp4ay" path="res://scenes/TurretTeacher.tscn" id="3_ruiun"]
-[ext_resource type="Script" path="res://scripts/wobble.gd" id="4_c0y8m"]
+[ext_resource type="Script" uid="uid://cn4s0t8gnjrwx" path="res://scripts/wobble.gd" id="4_c0y8m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)

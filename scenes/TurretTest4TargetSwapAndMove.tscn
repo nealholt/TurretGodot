@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bvwybm40dvfrm"]
 
-[ext_resource type="Script" path="res://scripts/Target2.gd" id="1_bo1kj"]
-[ext_resource type="Script" path="res://scripts/Mover.gd" id="3_846xh"]
+[ext_resource type="Script" uid="uid://csayvpq23d3n7" path="res://scripts/Target2.gd" id="1_bo1kj"]
+[ext_resource type="Script" uid="uid://chpthwl28oewg" path="res://scripts/Mover.gd" id="3_846xh"]
 [ext_resource type="PackedScene" uid="uid://bfqe1fxvcp4ay" path="res://scenes/TurretTeacher.tscn" id="4_pmras"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dattglbd4jvoi"]
 
-[ext_resource type="Script" path="res://scripts/Target2.gd" id="1_m2l36"]
-[ext_resource type="Script" path="res://scripts/TurretController.gd" id="2_jw8a3"]
+[ext_resource type="Script" uid="uid://csayvpq23d3n7" path="res://scripts/Target2.gd" id="1_m2l36"]
+[ext_resource type="Script" uid="uid://dt0xlb4ivv5ek" path="res://scripts/TurretController.gd" id="2_jw8a3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
