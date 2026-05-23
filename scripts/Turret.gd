@@ -74,6 +74,13 @@ func rotate_and_elevate(delta: float, current_target:Vector3) -> void:
 	# less than what we would rotate this frame.
 	var final_y:float = rotation_sign * min(rotation_speed * delta, y_angle)
 	body.rotate_y(final_y)
+	# Keep the rotation in the range -PI to PI. Clamp is NOT the solution
+	# because it will prevent rotation across the -180 to 180 edge
+	# of the circle
+	while body.rotation.y < -PI: # -180
+		body.rotation.y += 2*PI # 360
+	while PI < body.rotation.y: # 180
+		body.rotation.y -= 2*PI # -360
 	
 	# Rotation is complete, now we elevate.
 	# Project the target onto the ZY plane of the head
@@ -100,11 +107,11 @@ func rotate_and_elevate(delta: float, current_target:Vector3) -> void:
 	var final_x:float = elevation_sign * min(elevation_speed * delta, x_angle)
 	head.rotate_x(final_x)
 	# Clamp elevation within limits.
-	# Reverse and negate max and min because up is negative and
+	# Swap and negate max and min because up is negative and
 	# down is positive.
 	head.rotation.x = clamp(
 		head.rotation.x,
-		-max_elevation, min_elevation
+		-max_elevation, -min_elevation
 	)
 
 
