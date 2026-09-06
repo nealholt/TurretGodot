@@ -4,9 +4,9 @@ extends Node3D
 # forward and back to test if the turret can still
 # track effectively from a moving base.
 
-@export var x_rotate_rate := 0.1734
-@export var z_rotate_rate := 0.3235
-@export var z_move_rate := 2.436
+@export var x_rotate_rate :float = 0.1734
+@export var z_rotate_rate :float = 0.3235
+@export var z_move_rate :float = 2.436
 
 func _physics_process(delta: float) -> void:
 	rotate_x(x_rotate_rate * delta)

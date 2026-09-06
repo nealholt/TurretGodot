@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cybcorcysvmry"]
+[gd_scene format=3 uid="uid://cybcorcysvmry"]
 
 [ext_resource type="Script" uid="uid://csayvpq23d3n7" path="res://scripts/Target2.gd" id="1_c7500"]
 [ext_resource type="Script" uid="uid://dt0xlb4ivv5ek" path="res://scripts/TurretController.gd" id="3_m2dq3"]
@@ -41,17 +41,17 @@ albedo_color = Color(0.411765, 0.00392157, 0.835294, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_2os6s"]
 material = SubResource("StandardMaterial3D_t8qup")
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1877282879]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=364725042]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_color = Color(1, 1, 0.745098, 1)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1001352858]
 environment = SubResource("Environment_g7lfc")
 
-[node name="Target1" type="Node3D" parent="."]
+[node name="Target1" type="Node3D" parent="." unique_id=296605013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.3603)
 script = ExtResource("1_c7500")
 radius = 25.0
@@ -59,16 +59,16 @@ orbit_speed = 0.0
 vertical_speed = 0.0
 height_limit = 20.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Target1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target1" unique_id=2060351245]
 mesh = SubResource("BoxMesh_pu5i4")
 surface_material_override/0 = SubResource("StandardMaterial3D_7jlbr")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Target1"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Target1" unique_id=1502971520]
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_qk4ue")
 draw_pass_1 = SubResource("BoxMesh_2os6s")
 
-[node name="Target2" type="Node3D" parent="."]
+[node name="Target2" type="Node3D" parent="." unique_id=1457905363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.895, 0, 11.2237)
 visible = false
 script = ExtResource("1_c7500")
@@ -76,16 +76,16 @@ radius = 25.0
 orbit_speed = 0.0
 vertical_speed = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Target2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target2" unique_id=4406806]
 mesh = SubResource("BoxMesh_pu5i4")
 surface_material_override/0 = SubResource("StandardMaterial3D_7jlbr")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Target2"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Target2" unique_id=2130832928]
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_qk4ue")
 draw_pass_1 = SubResource("BoxMesh_2os6s")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1566992574]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -93,7 +93,7 @@ offset_top = -95.0
 offset_right = 215.0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1568521839]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -101,7 +101,7 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
 text = "Direction to target"
 
-[node name="Turret" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_os12n")]
+[node name="Turret" parent="." unique_id=2007499966 node_paths=PackedStringArray("target") instance=ExtResource("3_os12n")]
 transform = Transform3D(1, -6.70124e-08, 2.02251e-09, 6.70124e-08, 1, -1.45674e-08, -2.0225e-09, 1.45674e-08, 1, 0, -9, 0)
 script = ExtResource("3_m2dq3")
 elevation_speed_deg = 30.0
@@ -111,7 +111,7 @@ target = NodePath("../Target1")
 [node name="Head" parent="Turret/Body" index="1"]
 transform = Transform3D(1, -5.68598e-14, 0, -2.12207e-18, 1, -5.55112e-17, 0, -8.88178e-16, 1, -1.13687e-13, 0.7, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Turret/Body/Head" index="0"]
+[node name="Camera3D" type="Camera3D" parent="Turret/Body/Head" index="0" unique_id=17611187]
 transform = Transform3D(-1, 2.57816e-07, 3.89414e-07, 2.57816e-07, 1, 6.94888e-08, -3.89414e-07, 6.94889e-08, -1, 0, 0, 0)
 
 [node name="ElevationPlane" parent="Turret/Body/Head" index="1"]

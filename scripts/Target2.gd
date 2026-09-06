@@ -5,7 +5,7 @@ extends Node3D
 @export var radius:float = 50
 @export var orbit_speed :float = 0.1
 @export var vertical_speed :float = 0.1
-var elapsed_time := 0.0
+var elapsed_time :float = 0.0
 @export var height_limit:float = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

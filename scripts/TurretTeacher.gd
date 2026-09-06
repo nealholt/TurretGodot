@@ -119,12 +119,12 @@ func rotate_and_elevate(delta: float, current_target:Vector3) -> void:
 	# Display angles to target on the label
 	# if the label exists.
 	if outputlabel != null:
-		var rotation_text := "right"
+		var rotation_text :String = "right"
 		if round(rad_to_deg(y_angle)) == 0:
 			rotation_text = ""
 		elif rotation_sign > 0:
 			rotation_text = "left"
-		var elevation_text := "up"
+		var elevation_text :String = "up"
 		if round(rad_to_deg(x_angle)) == 0:
 			elevation_text = ""
 		elif elevation_sign > 0:
@@ -157,7 +157,7 @@ func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vect
 	# is above or below, or use seeker.global_transform.basis.x
 	# to see if target is to the left or right.
 	# Return value guaranteed to be between 0 and pi
-	var dir_to = seeker_pos.direction_to(target_pos)
+	var dir_to:Vector3 = seeker_pos.direction_to(target_pos)
 	# Normalizing IS necessary under certain circumstances.
 	facing_dir = facing_dir.normalized()
 	dir_to = dir_to.normalized()

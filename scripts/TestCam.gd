@@ -1,9 +1,9 @@
 extends CharacterBody3D
 # Source:
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979546#questions
-const SPEED = 5.0
+const SPEED :float = 5.0
 
-var mouse_motion := Vector2.ZERO
+var mouse_motion :Vector2 = Vector2.ZERO
 
 @onready var camera_pivot: Node3D = $CameraPivot
 
@@ -16,15 +16,15 @@ func _process(_delta: float) -> void:
 	handle_camera_rotation()
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir :Vector2 = Input.get_vector("left", "right", "forward", "back")
+	var direction :Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-	var vertical := Input.get_axis("down","up")
+	var vertical :float = Input.get_axis("down","up")
 	if vertical:
 		velocity.y = vertical * SPEED
 	else:
